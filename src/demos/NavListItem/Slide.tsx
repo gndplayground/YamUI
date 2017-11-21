@@ -44,17 +44,26 @@ export default class Slide extends React.PureComponent<SlideProps, {}> {
   private getStyle(state: string) {
     const { showAfter, duration } = this.props;
 
+    const transitionTransform = `transform ${duration}ms ${showAfter}ms`;
+    const transition = {
+      transition: transitionTransform,
+      MSTransition: transitionTransform,
+    };
+
     const transitionStyles: TransitionStyles = {
       entering: {
         transform: 'translateX(130%)',
+        MSTransform: 'translateX(130%)',
       },
       entered: {
-        transition: `transform ${duration}ms ${showAfter}ms`,
+        ...transition,
         transform: 'translateX(0%)',
+        MSTransform: 'translateX(0%)',
       },
       exited: {
+        ...transition,
         transform: 'translateX(130%)',
-        transition: `transform ${duration}ms ${showAfter}ms`,
+        MSTransform: 'translateX(130%)',
       },
     };
 

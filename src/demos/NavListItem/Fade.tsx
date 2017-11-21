@@ -37,6 +37,11 @@ export default class Fade extends React.PureComponent<FadeProps, {}> {
   @autobind
   private getStyle(state: string) {
     const { showAfter, duration } = this.props;
+    const opacityTransition = `opacity ${duration}ms ${showAfter}ms`;
+    const transition = {
+      transition: opacityTransition,
+      MSTransition: opacityTransition,
+    };
 
     const transitionStyles: TransitionStyles = {
       entering: {
@@ -44,14 +49,14 @@ export default class Fade extends React.PureComponent<FadeProps, {}> {
       },
       entered: {
         opacity: 1,
-        transition: `opacity ${duration}ms ${showAfter}ms`,
+        ...transition,
       },
       exiting: {
         opacity: 1,
       },
       exited: {
         opacity: 0,
-        transition: `opacity ${duration}ms ${showAfter}ms`,
+        ...transition,
       },
     };
 
